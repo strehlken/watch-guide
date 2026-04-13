@@ -38,7 +38,7 @@
   .hero {
     background: linear-gradient(165deg, #1a1a1b 0%, #2c2926 55%, #3d342b 100%);
     color: #f5f0eb;
-    padding: 4rem 2rem 3.5rem;
+    padding: 4rem 2rem 2rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -80,6 +80,50 @@
     line-height: 1.6;
   }
 
+  /* ── TAB BAR ── */
+  .tab-bar {
+    background: #1a1a1b;
+    border-bottom: 1px solid rgba(200, 162, 78, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-bar-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 1.5rem;
+  }
+  .tab-btn {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #7a756d;
+    background: none;
+    border: none;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.25s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: #b5afa7; }
+  .tab-btn.active {
+    color: var(--accent-gold);
+  }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background: var(--accent-gold);
+    border-radius: 2px 2px 0 0;
+  }
+
   /* ── LAYOUT ── */
   .container {
     max-width: 900px;
@@ -87,10 +131,11 @@
     padding: 0 1.5rem;
   }
 
-  /* ── TIER SECTIONS ── */
-  .tier {
-    margin: 3rem 0;
-  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── TIER / SECTION HEADERS ── */
+  .tier { margin: 3rem 0; }
   .tier-header {
     display: flex;
     align-items: center;
@@ -107,13 +152,15 @@
     padding: 5px 14px;
     border-radius: 100px;
     white-space: nowrap;
+    color: #fff;
   }
-  .tier-badge.priority { background: var(--accent-warm); color: #fff; }
-  .tier-badge.couples { background: var(--accent-teal); color: #fff; }
-  .tier-badge.genre { background: var(--accent-plum); color: #fff; }
+  .tier-badge.priority { background: var(--accent-warm); }
+  .tier-badge.couples { background: var(--accent-teal); }
+  .tier-badge.genre { background: var(--accent-plum); }
   .tier-badge.docs { background: var(--accent-gold); color: #1a1a1b; }
-  .tier-badge.crossed { background: #9e9a93; color: #fff; }
-  .card-crossed { opacity: 0.65; border-style: dashed; }
+  .tier-badge.crossed { background: #9e9a93; }
+  .tier-badge.essential { background: var(--accent-warm); }
+  .tier-badge.deeper { background: var(--accent-teal); }
   .tier-title {
     font-family: 'DM Serif Display', Georgia, serif;
     font-size: 1.55rem;
@@ -135,6 +182,7 @@
     box-shadow: var(--shadow-hover);
     transform: translateY(-1px);
   }
+  .card-crossed { opacity: 0.65; border-style: dashed; }
   .card-top {
     display: flex;
     justify-content: space-between;
@@ -172,7 +220,7 @@
     line-height: 1.65;
     color: var(--text);
   }
-  .card .why {
+  .card .note {
     margin-top: 0.65rem;
     font-size: 15px;
     color: var(--text-muted);
@@ -190,21 +238,27 @@
     border-radius: 100px;
   }
 
-  /* ── STARTER PICKS ── */
-  .starter {
+  /* ── STARTER / PREMISE BOXES ── */
+  .callout-box {
     background: linear-gradient(135deg, #faf7f2, #f0ebe3);
     border: 2px solid var(--accent-gold);
     border-radius: var(--radius);
-    padding: 2rem;
+    padding: 2rem 2.25rem;
     margin: 3rem 0;
-    text-align: center;
   }
-  .starter h2 {
+  .callout-box.centered { text-align: center; }
+  .callout-box h2 {
     font-family: 'DM Serif Display', Georgia, serif;
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
   }
-  .starter p { font-size: 17px; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+  .callout-box p {
+    font-size: 17px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    max-width: 620px;
+  }
+  .callout-box.centered p { margin: 0 auto; }
   .starter-picks {
     display: flex;
     justify-content: center;
@@ -227,9 +281,7 @@
   .starter-pick .emoji { font-size: 22px; }
 
   /* ── STREAMING CHEAT SHEET ── */
-  .cheatsheet {
-    margin: 3rem 0;
-  }
+  .cheatsheet { margin: 3rem 0; }
   .cheatsheet h2 {
     font-family: 'DM Serif Display', Georgia, serif;
     font-size: 1.5rem;
@@ -256,33 +308,14 @@
     margin-bottom: 0.5rem;
     color: var(--accent-warm);
   }
-  .service-card ul {
-    list-style: none;
-    padding: 0;
-  }
-  .service-card li {
-    font-size: 16px;
-    padding: 3px 0;
-    color: var(--text);
-  }
+  .service-card ul { list-style: none; padding: 0; }
+  .service-card li { font-size: 16px; padding: 3px 0; color: var(--text); }
   .service-card li::before {
-    content: '·';
+    content: '\b7';
     color: var(--accent-gold);
     font-weight: 700;
     margin-right: 8px;
   }
-
-  /* ── FOOTER ── */
-  footer {
-    text-align: center;
-    padding: 2.5rem 1rem;
-    font-size: 14px;
-    color: var(--text-muted);
-    border-top: 1px solid var(--border);
-    margin-top: 2rem;
-  }
-  footer a { color: var(--accent-teal); text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
 
   /* ── CHECKBOX ── */
   .watch-check {
@@ -304,7 +337,7 @@
     border-color: var(--accent-teal);
   }
   .watch-check:checked::after {
-    content: '✓';
+    content: '\2713';
     display: flex;
     align-items: center;
     justify-content: center;
@@ -315,7 +348,7 @@
   }
   .card:has(.watch-check:checked) { opacity: 0.55; }
   .card:has(.watch-check:checked) h3::after {
-    content: ' ✔ watched';
+    content: ' \2714 watched';
     font-family: 'DM Sans', sans-serif;
     font-size: 12px;
     color: var(--accent-teal);
@@ -326,10 +359,24 @@
     vertical-align: middle;
   }
 
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    font-size: 14px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+  footer a { color: var(--accent-teal); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
   @media (max-width: 600px) {
-    .hero { padding: 3rem 1.25rem 2.5rem; }
+    .hero { padding: 3rem 1.25rem 1.5rem; }
     .card { padding: 1.25rem; }
     .tier-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .callout-box { padding: 1.5rem; }
+    .tab-btn { padding: 0.85rem 1rem; font-size: 13px; }
   }
 </style>
 </head>
@@ -341,10 +388,22 @@
   <p>Everything worth streaming right now — picked for you two, organized by vibe, with scores so you can skip the scrolling.</p>
 </div>
 
+<!-- ── TAB BAR ── -->
+<nav class="tab-bar">
+  <div class="tab-bar-inner">
+    <button class="tab-btn active" data-tab="list">The Full List</button>
+    <button class="tab-btn" data-tab="counter">The Counter-Proposal</button>
+  </div>
+</nav>
+
 <div class="container">
 
-  <!-- ════ TONIGHT'S PICKS ════ -->
-  <div class="starter">
+<!-- ════════════════════════════════════════════ -->
+<!-- TAB 1: THE FULL LIST                        -->
+<!-- ════════════════════════════════════════════ -->
+<div id="tab-list" class="tab-panel active">
+
+  <div class="callout-box centered">
     <h2>Start Here Tonight</h2>
     <p>If you only have time for one — or want to know what to binge first — these three are the move.</p>
     <div class="starter-picks">
@@ -354,7 +413,7 @@
     </div>
   </div>
 
-  <!-- ════ TIER 1: DROP EVERYTHING ════ -->
+  <!-- ── PRIORITY ── -->
   <section class="tier">
     <div class="tier-header">
       <span class="tier-badge priority">Priority</span>
@@ -372,7 +431,7 @@
         <span class="score mc">MC 86</span>
       </div>
       <p>Steven Yeun and Ali Wong in a dark comedy about a road rage incident that spirals into mutual destruction. It's about race, class, ambition, marriage, and the gap between the life you're performing and the life you're actually living. Funny, vicious, and one of the few prestige shows that centers Asian American leads without making that the "topic."</p>
-      <p class="why">This should probably have been #1 all along. You two clearly process culture together — you'll be talking about it between episodes.</p>
+      <p class="note">This should probably have been #1 all along. You two clearly process culture together — you'll be talking about it between episodes.</p>
     </div>
 
     <div class="card">
@@ -387,7 +446,7 @@
         <span class="score mc">MC 85</span>
       </div>
       <p>Noah Wyle in a Pittsburgh ER drama from John Wells. Intense, real, brilliantly paced. Season 2 is sitting at 99% on Rotten Tomatoes.</p>
-      <p class="why">Great couples watch — dramatic without being gratuitously dark. Best reason to fire up Max right now.</p>
+      <p class="note">Great couples watch — dramatic without being gratuitously dark. Best reason to fire up Max right now.</p>
     </div>
 
     <div class="card">
@@ -397,12 +456,12 @@
         <span class="streaming-tag">Hulu / FX</span>
       </div>
       <div class="card-meta">
-        <span>2024 · Limited Series</span>
+        <span>February 2024 · Limited Series</span>
         <span class="score rt">RT 99%</span>
         <span class="score mc">MC 85</span>
       </div>
       <p>Feudal Japan. Political thriller. Stunning production values. Won a record number of Emmys. It's a slow-burn culture-clash story with a massive payoff.</p>
-      <p class="why">Sade, if you liked the cerebral tension of something like Arrival — this has that same "dropped into an unfamiliar world" feeling, just set 400 years ago.</p>
+      <p class="note">Sade, if you liked the cerebral tension of something like Arrival — this has that same "dropped into an unfamiliar world" feeling, just set 400 years ago.</p>
     </div>
 
     <div class="card">
@@ -412,16 +471,16 @@
         <span class="streaming-tag">Netflix</span>
       </div>
       <div class="card-meta">
-        <span>2024 · Limited Series</span>
+        <span>April 2024 · Limited Series</span>
         <span class="score rt">RT 98%</span>
         <span class="score mc">MC 88</span>
       </div>
       <p>A comedian being stalked. Sounds simple — but it's one of the most unsettling, darkly funny, and honest shows in years. Based on a true story.</p>
-      <p class="why">Where comedy meets horror. This one's going to stick with you both for a while.</p>
+      <p class="note">Where comedy meets horror. This one's going to stick with you both for a while.</p>
     </div>
   </section>
 
-  <!-- ════ TIER 2: COUPLES ════ -->
+  <!-- ── COUPLES ── -->
   <section class="tier">
     <div class="tier-header">
       <span class="tier-badge couples">Together</span>
@@ -440,7 +499,7 @@
         <span class="score mc">MC 82</span>
       </div>
       <p>Jean Smart as a legendary comedian mentoring a young comedy writer. Hilarious, sharp, and deeply satisfying — smart comedy with real emotional depth.</p>
-      <p class="why">For two people who go to comedy clubs together, this is a lock. Best comedy on TV right now.</p>
+      <p class="note">For two people who go to comedy clubs together, this is a lock. Best comedy on TV right now.</p>
     </div>
 
     <div class="card">
@@ -454,7 +513,34 @@
         <span class="score rt">RT 90%</span>
       </div>
       <p>Dark comedy thriller set at luxury resorts with razor-sharp writing and an ensemble cast. Darkly funny, morally ambiguous — think Coen Brothers on vacation.</p>
-      <p class="why">Raising Arizona and O Brother fans, this has that same pitch-black humor with beautiful people doing terrible things.</p>
+      <p class="note">Raising Arizona and O Brother fans, this has that same pitch-black humor with beautiful people doing terrible things.</p>
+    </div>
+
+    <div class="card">
+      <input type="checkbox" class="watch-check" title="Mark as watched">
+      <div class="card-top">
+        <h3>The Bear</h3>
+        <span class="streaming-tag">Hulu / FX</span>
+      </div>
+      <div class="card-meta">
+        <span>June 2022–present · 3 seasons</span>
+        <span class="score rt">RT 96%</span>
+        <span class="score mc">MC 84</span>
+      </div>
+      <p>A fine-dining chef inherits his dead brother's Chicago beef sandwich shop. On paper it's about cooking; actually it's about grief, family obligation, and whether excellence is compatible with being a decent person. Intense in a way that has nothing to do with violence or technology — just human pressure. The ensemble is diverse without being self-congratulatory about it.</p>
+    </div>
+
+    <div class="card">
+      <input type="checkbox" class="watch-check" title="Mark as watched">
+      <div class="card-top">
+        <h3>Industry</h3>
+        <span class="streaming-tag">HBO / Max</span>
+      </div>
+      <div class="card-meta">
+        <span>November 2020–present · S4 airing now</span>
+        <span class="score rt">RT 96%</span>
+      </div>
+      <p>Young people destroying themselves in London finance. Multiracial, sexually frank, morally chaotic — it treats its Black female lead (Myha'la Herrold) as a full, complicated, sometimes terrible person rather than a symbol. If you want something that feels adult and propulsive and doesn't care about teaching you a lesson, this is it.</p>
     </div>
 
     <div class="card">
@@ -464,7 +550,7 @@
         <span class="streaming-tag">Peacock</span>
       </div>
       <div class="card-meta">
-        <span>2023 · Procedural</span>
+        <span>January 2023 · Procedural</span>
         <span class="score rt">RT 97%</span>
         <span class="score mc">MC 83</span>
       </div>
@@ -483,36 +569,9 @@
       </div>
       <p>Jon Hamm in a dark comedy crime drama. One of the buzziest shows airing right now — and it's already on your Apple TV+.</p>
     </div>
-
-    <div class="card">
-      <input type="checkbox" class="watch-check" title="Mark as watched">
-      <div class="card-top">
-        <h3>The Bear</h3>
-        <span class="streaming-tag">Hulu / FX</span>
-      </div>
-      <div class="card-meta">
-        <span>2022–present · 3 seasons</span>
-        <span class="score rt">RT 96%</span>
-        <span class="score mc">MC 84</span>
-      </div>
-      <p>A fine-dining chef inherits his dead brother's Chicago beef sandwich shop. On paper it's about cooking; actually it's about grief, family obligation, and whether excellence is compatible with being a decent person. Intense in a way that has nothing to do with violence or technology — just human pressure. The ensemble is diverse without being self-congratulatory about it.</p>
-    </div>
-
-    <div class="card">
-      <input type="checkbox" class="watch-check" title="Mark as watched">
-      <div class="card-top">
-        <h3>Industry</h3>
-        <span class="streaming-tag">HBO / Max</span>
-      </div>
-      <div class="card-meta">
-        <span>2020–present · S4 airing now</span>
-        <span class="score rt">RT 96%</span>
-      </div>
-      <p>Young people destroying themselves in London finance. Multiracial, sexually frank, morally chaotic — it treats its Black female lead (Myha'la Herrold) as a full, complicated, sometimes terrible person rather than a symbol. If you want something that feels adult and propulsive and doesn't care about teaching you a lesson, this is it.</p>
-    </div>
   </section>
 
-  <!-- ════ TIER 3: SCI-FI / GENRE ════ -->
+  <!-- ── SCI-FI / GENRE ── -->
   <section class="tier">
     <div class="tier-header">
       <span class="tier-badge genre">Sci-Fi &amp; Genre</span>
@@ -526,7 +585,7 @@
         <span class="streaming-tag">FX / Hulu</span>
       </div>
       <div class="card-meta">
-        <span>2025 · Renewed for S2</span>
+        <span>July 2025 · Renewed for S2</span>
         <span class="score rt">RT 90%</span>
         <span class="score mc">MC 85</span>
       </div>
@@ -553,12 +612,12 @@
         <span class="streaming-tag">HBO / Max</span>
       </div>
       <div class="card-meta">
-        <span>2023–present · S2 in 2025</span>
+        <span>January 2023–present · S2 in 2025</span>
         <span class="score rt">RT 96%</span>
         <span class="score mc">MC 83</span>
       </div>
       <p>Pedro Pascal and Bella Ramsey in the prestige adaptation of the game. Even if you played it, Nick — the show stands entirely on its own as drama-horror.</p>
-      <p class="why">Sade, even with zero gaming background this works — it's a father-daughter survival story first, game adaptation second.</p>
+      <p class="note">Sade, even with zero gaming background this works — it's a father-daughter survival story first, game adaptation second.</p>
     </div>
 
     <div class="card">
@@ -575,7 +634,7 @@
     </div>
   </section>
 
-  <!-- ════ TIER 4: DOCS ════ -->
+  <!-- ── DOCS ── -->
   <section class="tier">
     <div class="tier-header">
       <span class="tier-badge docs">Docs</span>
@@ -603,7 +662,7 @@
         <span class="streaming-tag">HBO</span>
       </div>
       <div class="card-meta">
-        <span>2024 · Alex Gibney</span>
+        <span>September 2024 · Alex Gibney</span>
         <span class="score mc">MC 84</span>
       </div>
       <p>The making of The Sopranos, from the guy who lived it. Essential viewing for anyone in the NY/NJ orbit who grew up on this show.</p>
@@ -623,7 +682,7 @@
     </div>
   </section>
 
-  <!-- ════ CROSSED OFF ════ -->
+  <!-- ── CROSSED OFF ── -->
   <section class="tier">
     <div class="tier-header">
       <span class="tier-badge crossed">Crossed Off</span>
@@ -636,16 +695,16 @@
         <span class="streaming-tag">Netflix</span>
       </div>
       <div class="card-meta">
-        <span>2025 · Limited Series · 4 episodes</span>
+        <span>March 2025 · Limited Series · 4 episodes</span>
         <span class="score rt">RT 96%</span>
         <span class="score mc">MC 91</span>
       </div>
       <p>Technically impressive — four episodes each filmed in a single continuous take, about a 13-year-old accused of murder. The filmmaking craft is genuinely stunning. But the discourse around this show has been heavily politicized: the anti-smartphone parenting movement (the Jonathan Haidt / <em>Anxious Generation</em> crowd) adopted it as Exhibit A, while critics have pointed out that the show's actual subject — incel radicalization and toxic masculinity — is being flattened into a generic "phones bad" narrative that sidesteps questions of gender and race.</p>
-      <p class="why">We're in the second camp. The show itself may be more nuanced than the conversation around it, but we're not interested in watching it as an anti-phone PSA, and it's hard to unsee the framing once you've seen it. Life's too short — watch Beef instead.</p>
+      <p class="note">We're in the second camp. The show itself may be more nuanced than the conversation around it, but we're not interested in watching it as an anti-phone PSA, and it's hard to unsee the framing once you've seen it. Life's too short — watch Beef instead.</p>
     </div>
   </section>
 
-  <!-- ════ STREAMING CHEAT SHEET ════ -->
+  <!-- ── STREAMING CHEAT SHEET ── -->
   <section class="cheatsheet">
     <h2>Your Streaming Cheat Sheet</h2>
     <div class="service-grid">
@@ -656,8 +715,8 @@
           <li>Hacks</li>
           <li>The White Lotus</li>
           <li>The Last of Us</li>
+          <li>Industry</li>
           <li>Mel Brooks doc</li>
-          <li>Industry (S4, 96% RT)</li>
         </ul>
       </div>
       <div class="service-card">
@@ -697,11 +756,176 @@
     </div>
   </section>
 
-</div>
+</div><!-- /tab-list -->
+
+
+<!-- ════════════════════════════════════════════ -->
+<!-- TAB 2: THE COUNTER-PROPOSAL                 -->
+<!-- ════════════════════════════════════════════ -->
+<div id="tab-counter" class="tab-panel">
+
+  <div class="callout-box">
+    <h2>What happened</h2>
+    <p>Someone told you to watch Adolescence. You watched it (or heard enough about it) and something didn't sit right — maybe the moralizing, maybe the framing, maybe the feeling that you were being taught a lesson you didn't ask for. That reaction is valid, and it turns out there's a whole world of television that does the same things Adolescence reaches for — youth in crisis, online radicalization, systemic failure, the gap between what parents see and what's actually happening — with more complexity, more honesty, and a much wider lens. Here are seven of them.</p>
+  </div>
+
+  <!-- ── THE ESSENTIAL TWO ── -->
+  <section class="tier">
+    <div class="tier-header">
+      <span class="tier-badge essential">Start Here</span>
+      <h2 class="tier-title">The Two That Reframe the Conversation</h2>
+    </div>
+
+    <div class="card">
+      <input type="checkbox" class="watch-check" title="Mark as watched">
+      <div class="card-top">
+        <h3>When They See Us</h3>
+        <span class="streaming-tag">Netflix</span>
+      </div>
+      <div class="card-meta">
+        <span>May 2019 · Limited Series · 4 episodes</span>
+        <span>Ava DuVernay</span>
+        <span class="score rt">RT 96%</span>
+        <span class="score mc">MC 80</span>
+      </div>
+      <p>The Central Park Five — five Black and Latino teenagers accused of a crime they didn't commit, tried in the press before they ever saw a courtroom. DuVernay's four-part series extends the kind of intimate, devastating empathy to these boys that Adolescence reserves for its white protagonist. It's the most direct counterpoint to everything Adolescence is doing, and it aired years earlier.</p>
+      <p class="note">If Adolescence made you feel like you were watching someone else's panic, this will make you feel like you're watching something that was always yours.</p>
+    </div>
+
+    <div class="card">
+      <input type="checkbox" class="watch-check" title="Mark as watched">
+      <div class="card-top">
+        <h3>I May Destroy You</h3>
+        <span class="streaming-tag">HBO / Max</span>
+      </div>
+      <div class="card-meta">
+        <span>June 2020 · Limited Series · 12 episodes</span>
+        <span>Michaela Coel</span>
+        <span class="score rt">RT 98%</span>
+        <span class="score mc">MC 88</span>
+      </div>
+      <p>Michaela Coel's series about consent, trauma, and identity in the age of the internet. It deals with online harm and sexual violence with a complexity that makes most other shows on these subjects look like after-school specials. Coel wrote, created, and stars — and the result is one of the most acclaimed shows of the last decade, full stop.</p>
+      <p class="note">Everything Adolescence wants to say about how the internet warps young people, this show says better — and from a perspective that rarely gets this kind of platform.</p>
+    </div>
+  </section>
+
+  <!-- ── THE DEEPER BENCH ── -->
+  <section class="tier">
+    <div class="tier-header">
+      <span class="tier-badge deeper">Go Deeper</span>
+      <h2 class="tier-title">The Shows That Got There First</h2>
+    </div>
+
+    <div class="card">
+      <input type="checkbox" class="watch-check" title="Mark as watched">
+      <div class="card-top">
+        <h3>The Wire — Season 4</h3>
+        <span class="streaming-tag">HBO / Max</span>
+      </div>
+      <div class="card-meta">
+        <span>September 2006 · Season 4 of 5 · 13 episodes</span>
+        <span>David Simon</span>
+        <span class="score rt">RT 98%</span>
+      </div>
+      <p>Four Black middle-school boys in Baltimore navigating the school-to-prison pipeline. David Simon depicted systemic failure destroying children two decades before Adolescence — with more nuance, more structural understanding, and zero interest in making you feel like a bad parent. Nobody called it "required viewing for every family." They called it great television. It was both.</p>
+      <p class="note">You can watch Season 4 as a standalone if you haven't done the full series — though once you start, you won't want to stop.</p>
+    </div>
+
+    <div class="card">
+      <input type="checkbox" class="watch-check" title="Mark as watched">
+      <div class="card-top">
+        <h3>Top Boy</h3>
+        <span class="streaming-tag">Netflix</span>
+      </div>
+      <div class="card-meta">
+        <span>October 2011–March 2023 · 3 seasons</span>
+        <span class="score rt">RT 93%</span>
+      </div>
+      <p>Set on London housing estates — the same country, the same systemic failures, the same young people pulled into violence. Top Boy showed this world for over a decade with Black kids at the center. The response was "great crime drama," never "every parent in Britain must watch this." That framing gap is worth noticing.</p>
+    </div>
+
+    <div class="card">
+      <input type="checkbox" class="watch-check" title="Mark as watched">
+      <div class="card-top">
+        <h3>Atlanta</h3>
+        <span class="streaming-tag">Hulu / FX</span>
+      </div>
+      <div class="card-meta">
+        <span>September 2016–November 2022 · 4 seasons</span>
+        <span>Donald Glover</span>
+        <span class="score rt">RT 97%</span>
+        <span class="score mc">MC 87</span>
+      </div>
+      <p>Donald Glover's series about race, masculinity, fatherhood, class, and the surreal texture of Black life in America — without ever reducing any of it to a thesis statement. Where Adolescence says "here's the problem, feel bad," Atlanta says "here's the texture, figure it out yourself." That tonal difference is everything.</p>
+      <p class="note">If you've missed this, it might be the single best show on this list. Four seasons, all brilliant, each different from the last.</p>
+    </div>
+  </section>
+
+  <!-- ── GENRE ── -->
+  <section class="tier">
+    <div class="tier-header">
+      <span class="tier-badge genre">Genre</span>
+      <h2 class="tier-title">Same Themes, Wilder Swings</h2>
+    </div>
+
+    <div class="card">
+      <input type="checkbox" class="watch-check" title="Mark as watched">
+      <div class="card-top">
+        <h3>Swarm</h3>
+        <span class="streaming-tag">Prime Video</span>
+      </div>
+      <div class="card-meta">
+        <span>March 2023 · Limited Series · 7 episodes</span>
+        <span>Donald Glover &amp; Janine Nabers</span>
+        <span class="score rt">RT 79%</span>
+        <span class="score mc">MC 68</span>
+      </div>
+      <p>A horror-satire about a Black woman radicalized by internet fandom into violence. It's essentially the mirror image of Adolescence — online obsession warping a young person into something dangerous — but treated as genre horror rather than a parenting PSA. Nobody suggested Oprah co-sign this one.</p>
+      <p class="note">Polarizing on purpose. The critics who didn't get it are part of the point.</p>
+    </div>
+
+    <div class="card">
+      <input type="checkbox" class="watch-check" title="Mark as watched">
+      <div class="card-top">
+        <h3>Euphoria</h3>
+        <span class="streaming-tag">HBO / Max</span>
+      </div>
+      <div class="card-meta">
+        <span>June 2019–present · S3 airing now</span>
+        <span>Sam Levinson</span>
+        <span class="score rt">RT 82%</span>
+        <span class="score mc">MC 75</span>
+      </div>
+      <p>Actually does the "teens destroyed by the internet and their own psyches" story — with a diverse cast, visual ambition, and a willingness to be messy and contradictory. It's complicated, it's imperfect, and nobody's serving it to you as homework. It's allowed to just be a show.</p>
+    </div>
+  </section>
+
+</div><!-- /tab-counter -->
+
+</div><!-- /container -->
 
 <footer>
   Guide compiled April 2026 · <a href="index.html">Back to top</a> · <a href="https://strehlken.github.io/horror-filmmaker-map/">Horror Map</a>
 </footer>
 
+<script>
+  // Tab switching
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // Persist checkbox state
+  document.querySelectorAll('.watch-check').forEach((cb, i) => {
+    const key = 'wg-' + i;
+    cb.checked = localStorage.getItem(key) === '1';
+    cb.addEventListener('change', () => localStorage.setItem(key, cb.checked ? '1' : '0'));
+  });
+</script>
 </body>
 </html>
