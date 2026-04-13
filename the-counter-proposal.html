@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Counter-Proposal — What to Watch Instead</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔄</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+  :root {
+    --bg: #f5f0eb;
+    --bg-card: #ffffff;
+    --text: #1a1a1b;
+    --text-muted: #5c5a57;
+    --accent-gold: #c8a24e;
+    --accent-warm: #b8533e;
+    --accent-teal: #2a7a6f;
+    --accent-plum: #6b4c7a;
+    --border: #e2ddd6;
+    --shadow: 0 2px 16px rgba(30, 28, 24, 0.06);
+    --shadow-hover: 0 6px 28px rgba(30, 28, 24, 0.1);
+    --radius: 10px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .hero {
+    background: linear-gradient(165deg, #1a1a1b 0%, #2c2926 55%, #3d342b 100%);
+    color: #f5f0eb;
+    padding: 4rem 2rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(200, 162, 78, 0.03) 3px,
+      rgba(200, 162, 78, 0.03) 4px
+    );
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .hero h1 em { color: var(--accent-gold); font-style: italic; }
+  .hero p {
+    max-width: 580px;
+    margin: 0 auto;
+    font-size: 17px;
+    color: #b5afa7;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── PREMISE ── */
+  .premise {
+    background: linear-gradient(135deg, #faf7f2, #f0ebe3);
+    border: 2px solid var(--accent-gold);
+    border-radius: var(--radius);
+    padding: 2rem 2.25rem;
+    margin: 3rem 0;
+  }
+  .premise h2 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+  }
+  .premise p {
+    font-size: 17px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border);
+    margin-top: 3rem;
+  }
+  .section-badge {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+    color: #fff;
+  }
+  .section-badge.essential { background: var(--accent-warm); }
+  .section-badge.deeper { background: var(--accent-teal); }
+  .section-badge.genre { background: var(--accent-plum); }
+  .section-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+  }
+
+  /* ── SHOW CARDS ── */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+    position: relative;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-1px);
+  }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+  .card h3 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+  .card-meta {
+    font-size: 14px;
+    color: var(--text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    margin-bottom: 0.6rem;
+  }
+  .card-meta span { white-space: nowrap; }
+  .score {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .score.rt { color: #e53935; }
+  .score.mc { color: #6c3; }
+  .card p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .card .note {
+    margin-top: 0.65rem;
+    font-size: 15px;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.55;
+  }
+  .streaming-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: #edeae5;
+    color: var(--text-muted);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  /* ── CHECKBOX ── */
+  .watch-check {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--border);
+    border-radius: 5px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: all 0.2s;
+    background: #fff;
+  }
+  .watch-check:checked {
+    background: var(--accent-teal);
+    border-color: var(--accent-teal);
+  }
+  .watch-check:checked::after {
+    content: '✓';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    height: 100%;
+  }
+  .card:has(.watch-check:checked) { opacity: 0.55; }
+  .card:has(.watch-check:checked) h3::after {
+    content: ' ✔ watched';
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--accent-teal);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    font-size: 14px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+  footer a { color: var(--accent-teal); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 1.25rem 2.5rem; }
+    .card { padding: 1.25rem; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .premise { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">The Counter-Proposal</div>
+  <h1>You Didn't Like <em>Adolescence.</em><br>Fair Enough.</h1>
+  <p>Here's what you should actually be watching — seven shows that do what Adolescence was trying to do, but better, bolder, and without the lecture.</p>
+</div>
+
+<div class="container">
+
+  <div class="premise">
+    <h2>What happened</h2>
+    <p>Someone told you to watch Adolescence. You watched it (or heard enough about it) and something didn't sit right — maybe the moralizing, maybe the framing, maybe the feeling that you were being taught a lesson you didn't ask for. That reaction is valid, and it turns out there's a whole world of television that does the same things Adolescence reaches for — youth in crisis, online radicalization, systemic failure, the gap between what parents see and what's actually happening — with more complexity, more honesty, and a much wider lens. Here are seven of them.</p>
+  </div>
+
+  <!-- ════ THE ESSENTIAL TWO ════ -->
+  <div class="section-header">
+    <span class="section-badge essential">Start Here</span>
+    <h2 class="section-title">The Two That Reframe the Conversation</h2>
+  </div>
+
+  <div class="card">
+    <input type="checkbox" class="watch-check" title="Mark as watched">
+    <div class="card-top">
+      <h3>When They See Us</h3>
+      <span class="streaming-tag">Netflix</span>
+    </div>
+    <div class="card-meta">
+      <span>2019 · Limited Series · 4 episodes</span>
+      <span>Ava DuVernay</span>
+      <span class="score rt">RT 96%</span>
+      <span class="score mc">MC 80</span>
+    </div>
+    <p>The Central Park Five — five Black and Latino teenagers accused of a crime they didn't commit, tried in the press before they ever saw a courtroom. DuVernay's four-part series extends the kind of intimate, devastating empathy to these boys that Adolescence reserves for its white protagonist. It's the most direct counterpoint to everything Adolescence is doing, and it aired years earlier.</p>
+    <p class="note">If Adolescence made you feel like you were watching someone else's panic, this will make you feel like you're watching something that was always yours.</p>
+  </div>
+
+  <div class="card">
+    <input type="checkbox" class="watch-check" title="Mark as watched">
+    <div class="card-top">
+      <h3>I May Destroy You</h3>
+      <span class="streaming-tag">HBO / Max</span>
+    </div>
+    <div class="card-meta">
+      <span>2020 · Limited Series · 12 episodes</span>
+      <span>Michaela Coel</span>
+      <span class="score rt">RT 98%</span>
+      <span class="score mc">MC 88</span>
+    </div>
+    <p>Michaela Coel's series about consent, trauma, and identity in the age of the internet. It deals with online harm and sexual violence with a complexity that makes most other shows on these subjects look like after-school specials. Coel wrote, created, and stars — and the result is one of the most acclaimed shows of the last decade, full stop.</p>
+    <p class="note">Everything Adolescence wants to say about how the internet warps young people, this show says better — and from a perspective that rarely gets this kind of platform.</p>
+  </div>
+
+  <!-- ════ THE DEEPER BENCH ════ -->
+  <div class="section-header">
+    <span class="section-badge deeper">Go Deeper</span>
+    <h2 class="section-title">The Shows That Got There First</h2>
+  </div>
+
+  <div class="card">
+    <input type="checkbox" class="watch-check" title="Mark as watched">
+    <div class="card-top">
+      <h3>The Wire — Season 4</h3>
+      <span class="streaming-tag">HBO / Max</span>
+    </div>
+    <div class="card-meta">
+      <span>2006 · Season 4 of 5 · 13 episodes</span>
+      <span>David Simon</span>
+      <span class="score rt">RT 98%</span>
+    </div>
+    <p>Four Black middle-school boys in Baltimore navigating the school-to-prison pipeline. David Simon depicted systemic failure destroying children two decades before Adolescence — with more nuance, more structural understanding, and zero interest in making you feel like a bad parent. Nobody called it "required viewing for every family." They called it great television. It was both.</p>
+    <p class="note">You can watch Season 4 as a standalone if you haven't done the full series — though once you start, you won't want to stop.</p>
+  </div>
+
+  <div class="card">
+    <input type="checkbox" class="watch-check" title="Mark as watched">
+    <div class="card-top">
+      <h3>Top Boy</h3>
+      <span class="streaming-tag">Netflix</span>
+    </div>
+    <div class="card-meta">
+      <span>2011–2023 · 3 seasons</span>
+      <span class="score rt">RT 93%</span>
+    </div>
+    <p>Set on London housing estates — the same country, the same systemic failures, the same young people pulled into violence. Top Boy showed this world for over a decade with Black kids at the center. The response was "great crime drama," never "every parent in Britain must watch this." That framing gap is worth noticing.</p>
+  </div>
+
+  <div class="card">
+    <input type="checkbox" class="watch-check" title="Mark as watched">
+    <div class="card-top">
+      <h3>Atlanta</h3>
+      <span class="streaming-tag">Hulu / FX</span>
+    </div>
+    <div class="card-meta">
+      <span>2016–2022 · 4 seasons</span>
+      <span>Donald Glover</span>
+      <span class="score rt">RT 97%</span>
+      <span class="score mc">MC 87</span>
+    </div>
+    <p>Donald Glover's series about race, masculinity, fatherhood, class, and the surreal texture of Black life in America — without ever reducing any of it to a thesis statement. Where Adolescence says "here's the problem, feel bad," Atlanta says "here's the texture, figure it out yourself." That tonal difference is everything.</p>
+    <p class="note">If you've missed this, it might be the single best show on this list. Four seasons, all brilliant, each different from the last.</p>
+  </div>
+
+  <!-- ════ GENRE ════ -->
+  <div class="section-header">
+    <span class="section-badge genre">Genre</span>
+    <h2 class="section-title">Same Themes, Wilder Swings</h2>
+  </div>
+
+  <div class="card">
+    <input type="checkbox" class="watch-check" title="Mark as watched">
+    <div class="card-top">
+      <h3>Swarm</h3>
+      <span class="streaming-tag">Prime Video</span>
+    </div>
+    <div class="card-meta">
+      <span>2023 · Limited Series · 7 episodes</span>
+      <span>Donald Glover &amp; Janine Nabers</span>
+      <span class="score rt">RT 79%</span>
+      <span class="score mc">MC 68</span>
+    </div>
+    <p>A horror-satire about a Black woman radicalized by internet fandom into violence. It's essentially the mirror image of Adolescence — online obsession warping a young person into something dangerous — but treated as genre horror rather than a parenting PSA. Nobody suggested Oprah co-sign this one.</p>
+    <p class="note">Polarizing on purpose. The critics who didn't get it are part of the point.</p>
+  </div>
+
+  <div class="card">
+    <input type="checkbox" class="watch-check" title="Mark as watched">
+    <div class="card-top">
+      <h3>Euphoria</h3>
+      <span class="streaming-tag">HBO / Max</span>
+    </div>
+    <div class="card-meta">
+      <span>2019–present · S3 airing now</span>
+      <span>Sam Levinson</span>
+      <span class="score rt">RT 82%</span>
+      <span class="score mc">MC 75</span>
+    </div>
+    <p>Actually does the "teens destroyed by the internet and their own psyches" story — with a diverse cast, visual ambition, and a willingness to be messy and contradictory. It's complicated, it's imperfect, and nobody's serving it to you as homework. It's allowed to just be a show.</p>
+  </div>
+
+</div>
+
+<footer>
+  Compiled April 2026 · <a href="watch-guide.html">Full Watch Guide</a> · <a href="index.html">Home</a>
+</footer>
+
+</body>
+</html>
